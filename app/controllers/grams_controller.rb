@@ -22,10 +22,11 @@ class GramsController < ApplicationController
   end
 
   def new
-    @gram = Gram.new
+    @gram = Gram.new(gram_params)
   end
 
   def index
+    @grams = Gram.all
   end
 
   def create
@@ -53,7 +54,7 @@ class GramsController < ApplicationController
   private
 
   def gram_params
-    params.require(:gram).permit(:message)
+    params.require(:gram, :picture).permit(:message)
   end
   
     def render_not_found(status=:not_found)
