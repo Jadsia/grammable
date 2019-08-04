@@ -76,17 +76,11 @@ RSpec.describe GramsController, type: :controller do
     end
 
     it "should render the edit form with an http status of unprocessable_entity" do
-      # existing in database
       gram = FactoryBot.create(:gram, message: "Initial Value")
-      # User who created the gram is the user that is signed in.
       sign_in gram.user
-      # when user submit the edit form and perform the path request with an empty string
       patch :update, params: { id: gram.id, gram: { message: '' } }
-      # expect to the response with HTTP status of 422 Unprocessable_entity
       expect(response).to have_http_status(:unprocessable_entity)
-      # reload the gram to ensure it has its latest value
       gram.reload
-      # expect the gram's message to of gram to equal to Initial Value
       expect(gram.message).to eq "Initial Value"
     end
   end
