@@ -85,3 +85,7 @@ gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 gem 'figaro'
 
 gem 'fog-aws'
+
+gem 'chromedriver-helper'
+
+gem 'webdrivers', '~> 4.1', '>= 4.1.2'
