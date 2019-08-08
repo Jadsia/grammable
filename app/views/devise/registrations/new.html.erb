@@ -1,25 +1,413 @@
-<h2>Sign up</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
 
+Lesson 19: Make the Application Look Awesome
+Our application works as expected, but it doesn't look good. This happens fairly frequently when building features using test-driven development. Since we've spent less time refreshing the page, the design wasn't what we were focusing on. Instead, we are ensuring your application continues to work by running the test suite in the command-line.
+
+In this lesson, we'll put on our web designer hat and make the application look polished and attractive.
+
+
+Believe it or not, our application is basically finished. You may be looking at your application running at localhost:3030 thinking it looks pretty far from what we set out to build.
+
+We're remarkably close to where we want to end up. The last step is to adjust the HTML and add CSS to style the application. After completing this lesson, our application will have a resemblance to Instagram.
+
+Style Common Application Components
+The first step that I like to do when making applications look good is to tackle the components that will be the same across all pages. In this application, we can style the background and top navigation.
+
+Create a new file called app/assets/stylesheets/master.scss for our stylesheets to live in if you don't already have this file.
+
+Add the following snippet of CSS to make the background color a light gray. I'm going to use the color #fafafa.
+
+body {
+  background-color: #fafafa;
+}
+Save the file and refresh the page. The background color of the page will update to be a light gray. [Screenshot]
+
+Add a navbar that looks like Instagram's. It's a simple white box, which will be a div in our application. The brand logo should be offset from the left. Include links in the top navigation depending on if the user is signed in. We'll adjust the CSS for each of components in a moment. Edit app/views/layouts/application.html.erb so it looks like this:
+
+<body>
+  <div class="top-nav">
+    <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+      <div class="brand">
+        Grammable
+      </div>
+      <div class="add">
+        <% if current_user %>
+          You're signed in as <%= current_user.email %>.
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path %>
+          <%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
+      </div>
+    </div>
+    <br class="clear-fix" />
+  </div>
+
+
+
+
+
+  <%= yield %>
+
+</body> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Save the file. Refresh the page. [Screenshot]
+
+The top navigation should have a background color of white. We can match the div that has the class top-nav and make it have a white background. Add the following code to master.scss.
+
+.top-nav {
+  background-color: white;
+}
+Save the file. Refresh the page. [Screenshot]
+
+Add a border on the bottom of the navigation box. Specify that the border is 1 pixel tall, a gray color and solid. You can see all the different options for styling borders with CSS on w3schoolsLink opens in new tab. Add the following code:
+
+.top-nav {
+  background-color: white;
+  border-bottom-color: #edeeee;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+} 
+ 
+ 
+Save the file and refresh the page. [Screenshot]
+
+The name of the application, in this case Grammable, is inside a div with the class of brand. Add the following code to make the brand large, 30 pixels, and a blue color. Add the following CSS.
+
+.brand {
+  color: #125688;
+  font-size: 30px;
+}
+Save the file. Refresh the page. [Screenshot]
+
+Our brand text is taller than the container itself. Let's specify the top-nav's height is 70 pixels tall. We also want the brand to be pushed down to be in the middle of the bar. In this case we can push it down 15 pixels. Adjust the CSS to include the following:
+
+.top-nav {
+  background-color: white;
+  border-bottom-color: #edeeee;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  height: 70px;
+  padding-top: 15px;
+} 
+ 
+Save the file. Refresh the page. [Screenshot]
+
+In web design, using the right fonts makes applications look much better. I like the font Pacifico, so I'm going to use that font from Google Fonts for the brand.
+
+Follow the instructions Google provides and add the following in application.html.erb to include the font in our application.
+
+<head>
+  <title>Grammable</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+</head> 
+Save the file and the Pacifico font will be available in our application.
+
+In master.scss specify the font should be Pacifico by adding the following line of code:
+
+.brand {
+  color: #125688;
+  font-size: 30px;
+  font-family: 'Pacifico', cursive;
+} 
+Save the file. Refresh the page. [Screenshot]
+
+Adjust the brand in the top navigation so the brand is on the left side and the additional links in the navigation are pulled to the right-hand side. Edit app/views/layouts/application.html.erb to use the float-left and a float-right Bootstrap classes.
+
+<div class="top-nav">
+  <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+    <div class="brand float-left">
+      Grammable
+    </div>
+    <div class="add float-right">
+      <% if current_user %>
+      You're signed in as <%= current_user.email %>.
+      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+      <% else %>
+      <%= link_to "Sign In", new_user_session_path %>
+      <%= link_to "Sign Up", new_user_registration_path %>
+      <% end %>
+    </div>
+
+  </div>
+  <br class="clear-fix" />
+</div> 
+ 
+Save the file. Refresh the page. [Screenshot]
+
+By default Twitter Bootstrap uses the font Helvetica. Instead of using that font, use the Google Font Josefin Sans. The first step is to import the font in app/views/layouts/application.html.erb by adding the following line of code.
+
+<head>
+  <title>Grammable</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,100,300,600,700' rel='stylesheet' type='text/css'>
+</head> 
+Save the file.
+
+The next step is to make this font the default font for the application. Add the following to master.scss.
+
+body {
+  background-color: #fafafa;
+  font-family: 'Josefin Sans', sans-serif;
+} 
+Save the file. Refresh the page. [Screenshot]
+
+Adjust the links that are in top navigation. Set them to be 16 pixels tall, bold and a dark blue color of #125688, by adding the following code in master.scss.
+
+.top-nav .add a {
+  font-weight: bold;
+  color: #125688;
+  font-size: 16px;
+}
+Save the file. Refresh the page. [Screenshot]
+
+The links in the top navigation need to be pushed down a little bit to be centered in the application. Add the following line of code.
+
+.top-nav .add {
+  margin-top: 10px;
+}
+Save the file. Refresh the page. [Screenshot]
+
+Zooming Out: Padding vs. Margin
+In order to push the links in the top-nav lower on the page, we adjusted the margin property of the CSS. Earlier we pushed an item lower on the page by specifying the padding.
+
+Margins and paddings are different, and to fully understand the difference, the key is to understand what's known as the CSS Box Model.
+
+For a full-stack developer, knowing exactly how it works isn't terribly important (you can try using one, and if it doesn't work just use the other). As a front-end developer, knowing the distinction is important.
+
+The last change to the application's style is to make the links have a small amount of spacing on them. This will space out the Sign In and the Sign Up links. This will be obvious if you look at the page and you are not signed in. [Screenshot]
+
+.top-nav .add a {
+  font-weight: bold;
+  color: #125688;
+  font-size: 16px;
+  padding-left: 8px;
+} 
+Save the file. Refresh the page. [Screenshot]
+
+Style the Gram Listing Page
+Edit app/views/grams/index.html.erb to include a few different HTML elements. We can then start adding custom CSS for these components. We'll also wrap it in a div that has the bootstrap class of col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3. This will center the contents of the app and make them take up half the width of the screen if the viewport is very wide. As the viewport gets smaller, the contents of the app will take up a larger amount of the screen width.
+
+<div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+  <% @grams.each do |gram| %>
+  <div class="card">
+    <div class="handle"><%= gram.user.email %></div>
+    <%= image_tag gram.picture, class: 'img-fluid' %>
+    <p>
+      <%= gram.message %>
+    </p>
+  </div>
+  <% end %>
+</div>
+Save the file. Refresh the page. [Screenshot]
+
+Each gram should be wrapped in a white card. While building this out, I went to Instagram.comLink opens in new tab, and used the Google Chrome developer tools to see the CSS they were using and modified it slightly. Add the following to master.scss.
+
+.card {
+  background-color: #fff;
+  border-radius: .25rem;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  border: 1px solid #e8e8e8;
+  margin-top: 40px;
+  padding: 0;
+}
+Save the file. Refresh the page. [Screenshot]
+
+The text inside the handle div should be large, bold and blue. To achieve that, add the following code to master.scss:
+
+.handle {
+  margin: 10px;
+  color: #125688;
+  font-weight: bold;
+  font-size: 18px;
+}
+Save the file. Refresh the page. [Screenshot]
+
+Adjust the cards so items inside both p tags or inside a div with the class of message has text that's 18 pixels tall and has 20 pixels of spacing from all corners.
+
+.card p, .card .message {
+  font-size: 18px;
+  margin: 20px;
+}
+Save the file. Refresh the page. [Screenshot]
+
+Let's move on to style the other pages in our application and return back to the root page in a moment.
+
+Styling the GramController's New Action
+If a user is logged in, there should be a link to create a new gram in the top navigation. Edit app/views/layouts/application.html.erb to include the following line:
+
+<div class="top-nav">
+  <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+    <div class="brand float-left">
+      Grammable
+    </div>
+    <div class="add float-right">
+      <% if current_user %>
+        Welcome, <%= current_user.email %>.
+        <%= link_to "New Post", new_gram_path %>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Sign In", new_user_session_path %>
+        <%= link_to "Sign Up", new_user_registration_path %>
+      <% end %>
+    </div>
+
+  </div>
+  <br class="clear-fix" />
+</div> 
+Save the file. Refresh the page.
+
+Now, if you click on the link we added, you'll be taken to a page that looks like this.
+
+Next, wrap the content we added to the page to use the same positioning as the cards on the index page. Reuse the card class we added earlier. Adjust app/views/grams/new.html.erb to look like this.
+
+<div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 card form">
+
+  <h1>New Gram</h1>
+
+  <%= simple_form_for @gram do |f| %>
+    <%= f.input :message %>
+    <%= f.input :picture %>
+    <%= f.submit "Post!" %>
+  <% end %>
+
+</div> 
+ 
+Save the file. Refresh the page. [Screenshot]
+
+The form elements are flush against the card. The form would look better if it was spaced out a bit. Add the following to app/stylesheets/master.scss:
+
+.card.form {
+  padding: 20px;
+}
+Save the file. Refresh the page. [Screenshot]
+
+The form will look better if both the labels and the inputs on the form have a larger font. Add the following to master.scss to do that.
+
+label {
+  font-size: 18px;
+}
+
+input {
+  font-size: 18px;
+  font-weight: 400;
+}
+Save the file. Refresh the page. [Screenshot]
+
+We can style the Post! button on the form, but before we do that, let's add a CSS class for us to target in our CSS file. Edit app/views/grams/new.html.erb to include the following code:
+
+<div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 card form">
+
+  <h1>New Gram</h1>
+
+  <%= simple_form_for @gram do |f| %>
+    <%= f.input :message %>
+    <%= f.input :picture %>
+    <%= f.submit "Post!", class: 'my-btn' %>
+  <% end %>
+
+</div> 
+Save the file.
+
+Add the following code to master.scss to make this button big and blue with a white font color.
+
+.my-btn {
+  background-color: #125688;
+  width: 100%;
+  border: none;
+  font-size: 24px;
+  color: white;
+  margin-top: 10px;
+}
+Save the file. Refresh the page. [Screenshot]
+
+The form for us to add a new gram in our database looks awesome! Let's move on to the other pages in our application.
+
+Style the Sign-In Form
+Navigate to the page to sign in. Right now it looks like this .
+
+Style this page using the same CSS classes we added to the gram's new action. Edit app/views/devise/sessions/new.html.erb to include the following HTML.
+
+<div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 card form">
+
+  <h2>Log in</h2>
+
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :email, required: false, autofocus: true %>
+    <%= f.input :password, required: false %>
+    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, "Log in", class: 'my-btn' %>
   </div>
-<% end %>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+
+</div> 
+ 
+ 
+Save the file. Refresh the page. [Screenshot]
+
+The checkbox to Remember me looks a bit broken because of spacing problems. Add the following CSS to app/assets/stylesheets/master.scss to fix the spacing issues.
+
+.input.boolean {
+  margin-left: 18px;
+  margin-top: 5px;
+}
+
+.input.boolean label {
+  margin-top: 5px;
+  line-height: 44px;
+}
+Save the file. Refresh the page. [Screenshot]
+
+Style the User Sign-Up Page
+Navigate to the page to sign up. Right now it looks like this.
+
+Use the same design components that have been used on other forms to make this page look great. Edit app/views/devise/registrations/new.html.erb to include the following code:
+
+<div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 card form">
+
+  <h2>Sign up</h2>
+
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+    <%= f.input :password_confirmation, required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up", class: 'my-btn' %>
+  </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+
+</div>
