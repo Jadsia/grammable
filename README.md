@@ -1,24 +1,4 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<img width="445" alt="Grammable capture" src="https://user-images.githubusercontent.com/48420271/67200561-f74c1000-f3b8-11e9-8a9e-59d8a12d54b0.PNG">
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
