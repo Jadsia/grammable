@@ -8,7 +8,7 @@ Build on previous projects to include image hosting and sharing
 
 ### Project Requirements
 
-Rails backend, user authentication, commenting, AWS storage, image resizing, mobile optimization
+Rails backend, user authentication, commenting, AWS storage, image resizing, mobile optimization, hosted on heroku
 
 Link to live deploy https://grammable-megan-young.herokuapp.com/
  
