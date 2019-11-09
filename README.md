@@ -13,6 +13,8 @@ Build on previous projects to include image hosting and sharing
 * Image resizing
 * Mobile optimization
 * Hosted on heroku
+* Bootstrap integration
+
 
 Deploy: https://grammable-megan-young.herokuapp.com/
 
