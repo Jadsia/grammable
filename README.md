@@ -2,7 +2,7 @@
 
 ### Project Purpose
 
-Build on previous projects to include image hosting and sharing
+Intagram clone with image hosting and sharing functionality
 
 ### Project Requirements
 
