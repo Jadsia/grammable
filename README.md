@@ -39,10 +39,6 @@ Deploy: https://grammable-megan-young.herokuapp.com/
 
 https://github.com/Jadsia/grammable
  
-### Support
-Bug reports and feature requests can be filed with the rest for the Ruby on Rails project here:
-Link to “issues” on github
- 
 ### Copyright
 copyright:: (c) Copyright 2019 Megan Young. All Rights Reserved.
 
