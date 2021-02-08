@@ -80,7 +80,7 @@ gem 'devise'
 
 gem 'factory_bot_rails'
 
-gem 'carrierwave', '~> 1.3', '>= 1.3.1'
+gem 'carrierwave', '~> 1.3'
 
 gem 'figaro'
 
